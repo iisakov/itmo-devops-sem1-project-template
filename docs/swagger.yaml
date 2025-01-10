@@ -1,0 +1,65 @@
+basePath: /
+definitions:
+  model.Item:
+    properties:
+      total_categories:
+        type: integer
+      total_items:
+        type: integer
+      total_price:
+        type: integer
+    type: object
+host: 0.0.0.0:8080
+info:
+  contact:
+    email: by@artisan.io
+    name: Artisan
+    url: http://www.by_artisan.io/support
+  description: price archive позволяет хранить информацию о ценах на товары.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: price archive [by_Artisan]
+  version: "1.0"
+paths:
+  /api/v0/price/:
+    get:
+      consumes:
+      - application/json
+      description: Метод позволяет получить все товары
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/model.Item'
+              type: array
+            type: array
+      summary: Получить все товары
+      tags:
+      - Item
+    post:
+      consumes:
+      - application/json
+      description: Метод позволяет записать в базу данных список продуктов
+      parameters:
+      - description: Продукты
+        in: body
+        name: input
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.Item'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Добавить продукт
+      tags:
+      - Item
+swagger: "2.0"

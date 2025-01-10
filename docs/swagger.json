@@ -1,0 +1,98 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "price archive позволяет хранить информацию о ценах на товары.",
+        "title": "price archive [by_Artisan]",
+        "contact": {
+            "name": "Artisan",
+            "url": "http://www.by_artisan.io/support",
+            "email": "by@artisan.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "0.0.0.0:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/v0/price/": {
+            "get": {
+                "description": "Метод позволяет получить все товары",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "summary": "Получить все товары",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/model.Item"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Метод позволяет записать в базу данных список продуктов",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "summary": "Добавить продукт",
+                "parameters": [
+                    {
+                        "description": "Продукты",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Item"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Item": {
+            "type": "object",
+            "properties": {
+                "total_categories": {
+                    "type": "integer"
+                },
+                "total_items": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
