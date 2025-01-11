@@ -26,11 +26,8 @@ const docTemplate = `{
         "/api/v0/price/": {
             "get": {
                 "description": "Метод позволяет получить все товары",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
-                    "application/json"
+                    "application/zip"
                 ],
                 "tags": [
                     "Item"
@@ -40,13 +37,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/model.Item"
-                                }
-                            }
+                            "type": "zip"
                         }
                     }
                 }
@@ -54,49 +45,16 @@ const docTemplate = `{
             "post": {
                 "description": "Метод позволяет записать в базу данных список продуктов",
                 "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
+                    "application/zip"
                 ],
                 "tags": [
                     "Item"
                 ],
                 "summary": "Добавить продукт",
-                "parameters": [
-                    {
-                        "description": "Продукты",
-                        "name": "input",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.Item"
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
                     }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "model.Item": {
-            "type": "object",
-            "properties": {
-                "total_categories": {
-                    "type": "integer"
-                },
-                "total_items": {
-                    "type": "integer"
-                },
-                "total_price": {
-                    "type": "integer"
                 }
             }
         }

@@ -1,14 +1,4 @@
 basePath: /
-definitions:
-  model.Item:
-    properties:
-      total_categories:
-        type: integer
-      total_items:
-        type: integer
-      total_price:
-        type: integer
-    type: object
 host: localhost
 info:
   contact:
@@ -24,38 +14,21 @@ info:
 paths:
   /api/v0/price/:
     get:
-      consumes:
-      - application/json
       description: Метод позволяет получить все товары
       produces:
-      - application/json
+      - application/zip
       responses:
         "200":
           description: OK
           schema:
-            items:
-              items:
-                $ref: '#/definitions/model.Item'
-              type: array
-            type: array
+            type: zip
       summary: Получить все товары
       tags:
       - Item
     post:
       consumes:
-      - application/json
+      - application/zip
       description: Метод позволяет записать в базу данных список продуктов
-      parameters:
-      - description: Продукты
-        in: body
-        name: input
-        required: true
-        schema:
-          items:
-            $ref: '#/definitions/model.Item'
-          type: array
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
