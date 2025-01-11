@@ -16,7 +16,7 @@ import (
 // @Success      200 {array} model.Items
 // @Router       /api/v0/price/ [get]
 func GetItems(ctx *gin.Context) {
-	var response model.Items
+	var response []string
 	response, err := Storage.GetItems()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Не удалось получить данные.", "err": err.Error()})

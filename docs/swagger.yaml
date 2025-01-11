@@ -9,7 +9,7 @@ definitions:
       total_price:
         type: integer
     type: object
-host: 0.0.0.0:8080
+host: localhost
 info:
   contact:
     email: by@artisan.io
