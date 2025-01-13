@@ -20,6 +20,7 @@ import (
 func GetTotal(ctx *gin.Context) {
 	var response model.DataResponse
 	response, err := Storage.GetTotal()
+
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Ошибка при получении данных из базы",
