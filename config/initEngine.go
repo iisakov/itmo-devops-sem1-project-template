@@ -11,8 +11,8 @@ func InitEngine() (router *gin.Engine) {
 
 	v0Router := router.Group("/api/v0/")
 
-	v0Router.GET("/price", api.GetItems)
-	v0Router.POST("/price", api.AddItems)
+	v0Router.GET("/prices", api.GetTotal)
+	v0Router.POST("/prices", api.AddItems)
 
 	return
 }

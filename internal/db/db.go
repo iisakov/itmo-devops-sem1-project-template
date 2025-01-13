@@ -3,6 +3,6 @@ package db
 import "price/internal/model"
 
 type Storage interface {
-	GetItems() ([]string, error)
+	GetTotal() (model.DataResponse, error)
 	AddItems(items model.Items) error
 }

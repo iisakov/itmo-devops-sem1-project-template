@@ -2,26 +2,25 @@ package postgreSqlDb
 
 import (
 	"fmt"
+	"price/internal/db"
 	"price/internal/model"
 )
 
-func (ps PostgreSqlDb) GetItems() ([]string, error) {
-	res, err := ps.db.Query("select table_name from information_schema.tables")
-	if err != nil {
-		return []string{}, err
-	}
-	names := make([]string, 0)
-	for res.Next() {
-		var name string
-		err = res.Scan(&name)
-		if err != nil {
-			return []string{}, err
-		}
-		fmt.Printf("tableName: %s \n", name)
-		names = append(names, name)
-	}
+func (ps PostgreSqlDb) GetTotal() (model.DataResponse, error) {
+	response := model.DataResponse{}
 
-	return names, nil
+	// Получаем данные из базы
+	res := ps.db.QueryRow(db.TotalQuery)
+
+	// Записываем ответ
+	err := res.Scan(
+		&response.TotalItems,
+		&response.TotalCategories,
+		&response.TotalPrice)
+	if err != nil {
+		return response, err
+	}
+	return response, nil
 }
 
 func (ps PostgreSqlDb) AddItems(items model.Items) error {
