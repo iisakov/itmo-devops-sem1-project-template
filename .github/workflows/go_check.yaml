@@ -39,12 +39,9 @@ jobs:
 
     - name: Make scripts executable
       run: |
-        chmod +x scripts/prepare.sh
         chmod +x scripts/run.sh
+        chmod +x scripts/prepare.sh
         chmod +x scripts/tests.sh
-
-    - name: Prepare environment
-      run: ./scripts/prepare.sh
 
     - name: Run application
       run: ./scripts/run.sh
@@ -54,6 +51,9 @@ jobs:
         POSTGRES_DB: project-sem-1
         POSTGRES_USER: validator
         POSTGRES_PASSWORD: val1dat0r
+
+    - name: Prepare environment
+      run: ./scripts/prepare.sh
 
     - name: Test Level 1
       id: test-level-1

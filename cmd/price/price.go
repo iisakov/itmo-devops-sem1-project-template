@@ -19,7 +19,7 @@ import (
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host      localhost
+// @host      localhost:8080
 // @BasePath  /
 func main() {
 	router := config.InitEngine()
@@ -33,7 +33,7 @@ func main() {
 	}))
 
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	err := router.Run(":80")
+	err := router.Run(":8080")
 	if err != nil {
 		return
 	}

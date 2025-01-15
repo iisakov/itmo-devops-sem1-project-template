@@ -11,6 +11,7 @@ import (
 )
 
 func UnZip(fromFilePath, distPath string) gin.H {
+
 	// Открываем файл fromFilePath
 	zipReader, err := zip.OpenReader(fromFilePath)
 	if err != nil {
@@ -36,7 +37,7 @@ func UnZip(fromFilePath, distPath string) gin.H {
 func uzf(f *zip.File, distPath string) error {
 	filePath := filepath.Join(distPath, f.Name)
 	if !strings.HasPrefix(filePath, filepath.Clean(distPath)+string(os.PathSeparator)) {
-		return fmt.Errorf("invalid file path: %s", filePath)
+		return fmt.Errorf("недопустимый путь к файлу: %s", filePath)
 	}
 
 	if f.FileInfo().IsDir() {

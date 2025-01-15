@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func Write(distFilePath string, data model.DataResponse) gin.H {
+func Write(distFilePath string, data model.Items) gin.H {
 	// Создаём файл result.csv
 	resultCSV, err := os.Create(distFilePath)
 	defer resultCSV.Close()
@@ -25,22 +25,26 @@ func Write(distFilePath string, data model.DataResponse) gin.H {
 	defer cswWriter.Flush()
 
 	// Пишем заголовок в файл result.csv
-	err = cswWriter.Write([]string{"total_items", "total_categories", "total_price"})
+	err = cswWriter.Write([]string{"id", "create_at", "name", "category", "price"})
 	if err != nil {
 		return gin.H{
 			"message": fmt.Sprintf("Ошибка при записи зоголовка в файл %s", distFilePath),
 			"error":   err.Error(),
 		}
 	}
-	var totalItems = strconv.Itoa(data.TotalItems)
-	var totalCategories = strconv.Itoa(data.TotalCategories)
-	var totalPrice = strconv.FormatFloat(data.TotalPrice, 'f', -1, 64)
 
-	err = cswWriter.Write([]string{totalItems, totalCategories, totalPrice})
-	if err != nil {
-		return gin.H{
-			"message": fmt.Sprintf("Ошибка при записи данных в файл %s", distFilePath),
-			"error":   err.Error(),
+	for _, item := range data {
+		err = cswWriter.Write([]string{
+			strconv.Itoa(item.Id),
+			item.CreateDate,
+			item.Name,
+			item.Category,
+			strconv.FormatFloat(item.Price, 'f', -1, 64)})
+		if err != nil {
+			return gin.H{
+				"message": fmt.Sprintf("Ошибка при записи данных в файл %s", distFilePath),
+				"error":   err.Error(),
+			}
 		}
 	}
 
