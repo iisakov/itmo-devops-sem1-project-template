@@ -4,5 +4,5 @@
 set -e
 
 go build -o ./bin/app ./cmd/price/price.go
-./bin/app
+./bin/app &
 
