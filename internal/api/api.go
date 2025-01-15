@@ -10,7 +10,7 @@ import (
 
 func mustDBConnect() *postgreSqlDb.DBConnect {
 	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("Не найден файл .env")
+		log.Println("Не найден файл .env")
 	}
 
 	port, err := strconv.Atoi(os.Getenv("DB_PORT"))
