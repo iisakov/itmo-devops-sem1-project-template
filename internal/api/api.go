@@ -18,7 +18,7 @@ func mustDBConnect() *postgreSqlDb.DBConnect {
 		log.Fatal("Порт не порт")
 	}
 	return &postgreSqlDb.DBConnect{
-		HOST:     os.Getenv("DB_HOST"),
+		HOST:     os.Getenv("DB_HOST_OUTSIDE"),
 		DBNAME:   os.Getenv("DB_NAME"),
 		PORT:     port,
 		USER:     os.Getenv("USER_NAME"),
