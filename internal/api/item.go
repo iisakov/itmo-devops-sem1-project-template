@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	myCsv "price/internal/csv"
+	"price/internal/db/postgreSqlDb"
 	"price/internal/model"
 	myZip "price/internal/zip"
 )
@@ -19,6 +20,9 @@ import (
 // @Router       /api/v0/prices/ [get]
 func GetItems(ctx *gin.Context) {
 	var response model.Items
+
+	var Storage = postgreSqlDb.New(mustDBConnect())
+	defer func() { _ = Storage.Close() }()
 	response, err := Storage.GetItems()
 
 	if err != nil {
@@ -92,6 +96,9 @@ func AddItems(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, m)
 		return
 	}
+
+	var Storage = postgreSqlDb.New(mustDBConnect())
+	defer func() { _ = Storage.Close() }()
 
 	err = Storage.AddItems(items)
 	if err != nil {

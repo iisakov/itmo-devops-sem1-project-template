@@ -25,5 +25,3 @@ func mustDBConnect() *postgreSqlDb.DBConnect {
 		PASSWORD: os.Getenv("USER_PASSWORD"),
 	}
 }
-
-var Storage = postgreSqlDb.New(mustDBConnect())

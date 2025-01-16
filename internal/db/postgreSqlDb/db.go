@@ -3,7 +3,6 @@ package postgreSqlDb
 import (
 	"database/sql"
 	"fmt"
-
 	_ "github.com/lib/pq"
 )
 
@@ -20,8 +19,8 @@ type PostgreSqlDb struct {
 }
 
 func New(conn *DBConnect) *PostgreSqlDb {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
+	psqlInfo := fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		conn.HOST, conn.PORT, conn.USER, conn.PASSWORD, conn.DBNAME)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
@@ -36,4 +35,8 @@ func New(conn *DBConnect) *PostgreSqlDb {
 	fmt.Println("Successfully connected!")
 
 	return &PostgreSqlDb{db: db}
+}
+
+func (db *PostgreSqlDb) Close() error {
+	return db.db.Close()
 }

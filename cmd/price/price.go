@@ -27,8 +27,8 @@ func main() {
 	router := config.InitEngine()
 
 	router.Use(cors.New(cors.Config{
-		AllowAllOrigins:  true,                                                // Разрешает все домены, можно настроить по необходимости
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, // Разрешенные методы
+		AllowAllOrigins:  true,                                                // Разрешает все домены
+		AllowMethods:     []string{"GET", "POST"},                             // Разрешенные методы
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"}, // Разрешенные заголовки
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true, // Разрешить отправку куки
