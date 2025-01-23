@@ -4,7 +4,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"price/internal/db/postgreSqlDb"
+	"price/internal/db/postgre_sql_db"
 	"strconv"
 )
 
@@ -25,3 +25,5 @@ func mustDBConnect() *postgreSqlDb.DBConnect {
 		PASSWORD: os.Getenv("USER_PASSWORD"),
 	}
 }
+
+var Storage = postgreSqlDb.New(mustDBConnect())

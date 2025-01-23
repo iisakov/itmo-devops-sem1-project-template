@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"price/config"
 	_ "price/docs"
+	"price/internal/api"
 )
 
 // @title           price archive [by_Artisan]
@@ -23,7 +23,7 @@ import (
 // @host      localhost:8080
 // @BasePath  /
 func main() {
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	router := config.InitEngine()
 
 	router.Use(cors.New(cors.Config{
@@ -39,4 +39,6 @@ func main() {
 	if err != nil {
 		return
 	}
+
+	defer func() { _ = api.Storage.Close() }()
 }
